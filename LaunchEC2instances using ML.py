@@ -10,8 +10,8 @@ import boto3
 
 ec2 = boto3.client('ec2',
                    'ap-south-1',
-                   aws_access_key_id='AKIAZPFU7YLX',
-                   aws_secret_access_key='IB7YFUbNAmZNf/uWzl02SZpWnNMspz0')
+                   aws_access_key_id='AKIAZPFUYH677YLX',
+                   aws_secret_access_key='IB7YFUbNAtyikj\zl02SZpWnNMspz0')
 
 
 # In[2]:
