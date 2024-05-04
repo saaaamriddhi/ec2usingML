@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #8f94fb; /* Background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"], input[type="password"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #a5a9fa; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #7d82e6; /* Button color on hover */
+        }
+        .switch-btn {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Login / Signup</h1>
+        <!-- Login Form -->
+        <form id="login-form" action="#" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login"  onclick="redirectToAnotherPage(event)">
+            <p>Don't have an account? <button type="button" class="switch-btn" onclick="toggleForm()">Signup</button></p>
+        </form>
+        <!-- Signup Form (Initially Hidden) -->
+        <form id="signup-form" action="#" method="post" style="display: none;">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="tel" name="phone" placeholder="Phone Number">
+            <input type="submit" value="Signup">
+            <p>Already have an account? <button type="button" class="switch-btn" onclick="toggleForm()">Login</button></p>
+        </form>
+    </div>
+
+    <script>
+        function toggleForm() {
+            var loginForm = document.getElementById("login-form");
+            var signupForm = document.getElementById("signup-form");
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                signupForm.style.display = "none";
+            } else {
+                loginForm.style.display = "none";
+                signupForm.style.display = "block";
+            }
+        }
+       
+        function redirectToAnotherPage(event) {
+            // Redirect to another HTML file
+            event.preventDefault();
+            window.location.href = "templates/index.html";
+        }
+    </script>
+</body>
+</html>

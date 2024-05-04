@@ -1,0 +1,319 @@
+<html>
+<head>
+<title>Docker Management Webapp</title>
+   <link rel="icon" href="icon.png" type="image/x-icon">
+
+<meta http-equiv="refresh" content="; url =
+    " />
+
+<script>
+$(document).ready(function(){
+   
+   $('#content').load("index.html");
+
+});
+</script>
+
+<style>
+body {
+  font-family: Arial;
+  color: white;
+  overflow-x: hidden;
+}
+input[type=button]{
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 18;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: black;
+}
+.wax1{
+visibility: hidden;
+}
+.wax2{
+position: absolute;
+width: 300px;
+height: 250px;
+z-index: 1;
+visibility: hidden;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  z-index: 1;
+  top:0;
+  overflow:scroll;
+  padding-top: 20px;
+}
+
+.left {
+ top:13.7vh;
+  left: 0;
+  background-color:#8f94fb ;
+  color : black;
+  border:3px solid black;
+  
+}
+
+.right {
+  top:13.7vh;
+  right: 0;
+  background-color: black;
+  overflow: scroll;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color:black;
+}
+.corner {
+  position: absolute;
+  top: 80%;
+  left: 5%;
+  
+  
+  color:black;
+}
+.lt{
+position: absolute;
+color:white;
+left:5%;
+}
+.heading{
+font-style:italic;
+color:white;
+background-color:#8f94fb;
+text-shadow: 0 0 5px black, 0 0 7px black;
+}
+ #d1{
+        border: 2px solid black;
+        width: 100%;
+        height: 50%;
+        background-color: yellow;
+        color: red;
+    }
+#content{
+background-color: red;
+}
+</style>
+
+<script>
+function ajaxInt() {
+  var cn = document.getElementById("CName").value;
+  var ci = document.getElementById("CImage").value;
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("d1").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "http://publicip:Localhost/run?cname" + cn + "&cimage=" + ci );
+  xhttp.send();
+}
+
+function forDockerPs() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("d2").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "http://publicip:Localhost/ps");
+  xhttp.send();
+}
+
+function Dockerdel() {
+  var cdel = document.getElementById("dcon").value;
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("d3").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "http://publicip:Localhost/del?dcon" + cdel);
+  xhttp.send();
+}
+
+function Dockerstop() {
+  var cst = document.getElementById("stcon").value;
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("d4").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "http://publicip:Localhost/stop");
+  xhttp.send();
+}
+
+function Dockerstart() {
+  var cst = document.getElementById("startcon").value;
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("d5").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "http://publicip:Localhost/start");
+  xhttp.send();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function v1() {
+    document.getElementById('CName').value = '';
+    await sleep(2000);
+    $("#o1").css('visibility','visible');
+    $("#c1").css('visibility','visible');
+}
+async function v2() {
+    await sleep(2000);
+    $("#o2").css('visibility','visible');
+}
+async function v3() {
+    document.getElementById('CName').value = '';
+    await sleep(2000);
+    $("#o3").css('visibility','visible');
+    $("#c2").css('visibility','visible');
+}
+async function v4() {
+    document.getElementById('CName').value = '';
+    await sleep(2000);
+    $("#o4").css('visibility','visible');
+    $("#c3").css('visibility','visible');
+}
+async function v5() {
+    await sleep(2000);
+    $("#o5").css('visibility','visible');
+}
+async function v6() {
+    await sleep(2000);
+    $("#o8").css('visibility','visible');
+    $("#o9").css('visibility','visible');
+}
+
+</script>
+</head>
+<body>
+
+<div class="heading"><marquee scrollamount="18"><u><h1>LAUNCH YOUR CONTAINER IN JUST ONE CLICK BY USING OUR DOCKER MANAGEMENT WEBAPP!</h1></u></marquee></div>
+
+
+<div class="split left">
+  <div  class="centered"> 
+
+<h1>Launch Container</h1>
+<form action="/run" method="GET">
+
+
+<p style="color:#8f94fb;">.</p> 
+<p style="color:#8f94fb;">.</p> 
+<p style="color:#8f94fb;">.</p> 
+<div style="background-color: #8f94fb; font-size: 18px; color: black;"><b> Container Name </b><input name="containerName" id="CName" style="background-color: #8f94fb; border-width: 3px; border-style: solid; border-color: black; color: black; display: inline;"/></div>
+<br />
+<div style="font-size: 18px; display: inline;"><b>Image</b></div>
+<select style="background-color: #8f94fb; font-size: 18px; border-width: 3px; border-style: solid; border-color: black; color: black; display: inline;" name="containerImage" id="CImage">
+        <option data-img_src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Centos-logo-light.svg/987px-Centos-logo-light.svg.png?20151212075231">centos</option>
+        <option data-img_src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ubuntu-logo-2022.svg/768px-Ubuntu-logo-2022.svg.png?20220421195347">ubuntu</option>
+        <option data-img_src="https://www.redhat.com/cms/managed-files/Asset-Red_Hat-Logo_page-Logo-RGB.svg?itok=yWDK-rRz">redhat</option>
+        <option data-img_src="http://talesfromthedatacenter.com/wp-content/uploads/2018/04/OracleTux_thumb.png">oracle</option>
+</select>
+<br />
+
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+<script type="text/javascript">
+async function rm() {
+    await sleep(2000);
+    $("#o6").css('visibility','visible');
+    $("#o7").css('visibility','visible');
+}
+
+    function custom_template(obj){
+            var data = $(obj.element).data();
+            var text = $(obj.element).text();
+            if(data && data['img_src']){
+                img_src = data['img_src'];
+                template = $("<div><img src=\"" + img_src + "\" style=\"width:100%;height:150px;\"/><p style=\"font-weight: 700;font-size:14pt;text-align:center;\">" + text + "</p></div>");
+                return template;
+            }
+        }
+    var options = {
+        'templateSelection': custom_template,
+        'templateResult': custom_template,
+    }
+    $('#CImage').select2(options);
+    $('.select2-container--default .select2-selection--single').css({'height': '220px'});
+
+</script>
+<!--
+<form>
+  Enter the container to be deleted:<input name="Delcontainer" id="dcon" /></br>
+
+  Enter the container to be stopped:<input name="Stcontainer" id="stcon" /></br>
+
+  Enter the container to be start:<input name="Startcontainer" id="startcon" /></br>
+</form>
+-->
+<div id=""></div>
+
+
+<p id="" style="color:#8f94fb;">.</p>
+
+<p id="" style="color:#8f94fb;">.</p>
+
+<p id="" style="color:#8f94fb;">.</p>
+
+<p id="" style="color:#8f94fb;"></p>
+
+
+<p></p>
+</div>
+<div class="corner"><input type="button" value="Launch Container" onmouseover="v1()" onclick="v3()" ondblclick="v4()" style="display: inline;"/><div onclick="v6()" style="display: inline; color:#8f94fb;" >....</div><input type="button" value="Active Containers" id="cmd1" onmouseover="v2()" ondblclick="v5()" style="display: inline;"/><div style="display: inline; color:#8f94fb;" >....</div><input type="button" value="Remove Containers" onclick="rm()" style="display: inline;"/></div>
+</div>
+
+<div class="split right">
+  <div class="lt"> 
+    <h1>Output Interface</h1>
+<!-- <script>list_of_arrays.reduce((flattened, item) => {
+   if (Array.isArray(item) === false) {
+      return [...flattened, item]
+   }
+   if (Array.isArray(item) && Array.isArray(item[0])) {
+      return [
+         ...flattened,
+         ....item.reduced((flatten, nested_list) => [...flatten, ...nested_list, [])
+       ]
+      ]
+   }
+
+   return [...flattened, ...item]
+}, [])
+<script> -->
+</div>
+</div>
+     
+</body>
